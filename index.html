@@ -3,9 +3,64 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rakAI-chatbot</title>
   </head>
   <body>
-    <div></div>
+    <section class="js-hero-header">
+    </section>
   </body>
-  <script></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const container = document.querySelector('.js-hero-header');
+    const rootHeader = ReactDOM.createRoot(container);
+
+    function ChatInput() {
+      return (
+        <>
+          <input placeholder="Look up here.." size="40"/>
+          <button>Send</button>
+        </>
+      );
+    };
+
+    function ChatMessage({ message , sender }) {
+
+      // const message = properties.message;
+      // const sender = properties.sender;
+      // const { message , sender } = properties;
+
+      // if( sender === "bot" ) {  
+      //   return (
+      //     <div>
+      //       <img src="images/user.png" width="50"/>
+      //       {message}
+      //     </div>
+      //   );
+      // };
+
+      return (
+        <div>
+          { sender === "bot" && <img src="images/bot.png" width="50"/>} 
+          {message}
+          { sender === "user" && <img src="images/user.png" width="50"/>}
+        </div>
+      );
+    };
+
+    function App() {
+      return (
+        <>
+          <ChatInput />
+          <ChatMessage message="Hey!. How are you?" sender="user"/>
+          <ChatMessage message="Yeah I am good. How are you?" sender="bot"/>
+          <ChatMessage message="Great. Its been long just wanted to catch up?. How you have been? whats going on?" sender="user"/>
+          <ChatMessage message="Doing alright. Just working yk and went on a trip to Alaska" sender="bot" />
+        </>
+      );
+    };
+
+    rootHeader.render(<App/>);
+  </script>
 </html>
