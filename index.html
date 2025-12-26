@@ -25,42 +25,67 @@
       );
     };
 
+    // const message = properties.message;
+    // const sender = properties.sender;
+    // const { message , sender } = properties;
+    
     function ChatMessage({ message , sender }) {
-
-      // const message = properties.message;
-      // const sender = properties.sender;
-      // const { message , sender } = properties;
-
-      // if( sender === "bot" ) {  
-      //   return (
-      //     <div>
-      //       <img src="images/user.png" width="50"/>
-      //       {message}
-      //     </div>
-      //   );
-      // };
-
       return (
         <div>
           { sender === "bot" && <img src="images/bot.png" width="50"/>} 
-          {message}
+          { message }
           { sender === "user" && <img src="images/user.png" width="50"/>}
         </div>
       );
     };
 
+    // Message Component
+    function ChatMsgComp() {
+      let chatMessagesArray = [
+        {
+          message : "Hey!. How are you?",
+          sender : "user",
+          id : 'id1'
+        },
+        {
+          message : "Yeah I am good. How are you?",
+          sender : "bot",
+          id : 'id2'
+        },
+        {
+          message : "Great. Its been long just wanted to catch up?. How you have been? whats going on?",
+          sender : "user",
+          id : 'id3'
+        },
+        {
+          message : "Doing alright. Just working yk and went on a trip to Alaska",
+          sender : "bot",
+          id : 'id4'
+        }
+      ];
+
+      return (
+        chatMessagesArray.map( (chat) => {
+          return (
+            <ChatMessage 
+              message = {chat.message}
+              sender = {chat.sender}
+              key = {chat.id}
+            />
+          ); 
+        })
+      );
+    };
+
+    // APP
     function App() {
       return (
         <>
           <ChatInput />
-          <ChatMessage message="Hey!. How are you?" sender="user"/>
-          <ChatMessage message="Yeah I am good. How are you?" sender="bot"/>
-          <ChatMessage message="Great. Its been long just wanted to catch up?. How you have been? whats going on?" sender="user"/>
-          <ChatMessage message="Doing alright. Just working yk and went on a trip to Alaska" sender="bot" />
+          <ChatMsgComp />
         </>
       );
     };
-
     rootHeader.render(<App/>);
   </script>
 </html>
