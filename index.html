@@ -12,30 +12,40 @@
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script src="https://unpkg.com/supersimpledev@8.0.1/chatbot.js"></script>
   <script type="text/babel"> 
     const container = document.querySelector('.js-hero-header');
     const rootHeader = ReactDOM.createRoot(container);
-
+                                                        // <---- Chat Input Head --->
     function ChatInput({ chatMessages , setChatMessage }) {
       // 1.get the Input value and save it in inputText
       const [ inputText , setInputText ] = React.useState('');      
       function saveInputText( event ) {
         setInputText( event.target.value );
       };
-
       // 2.from the InpuText value --> send it into chatMessages(message array)
       function sendMessage() {
-        setChatMessage([
+        const newChatMessage = [
           ...chatMessages,
           {
             message : inputText,
             sender : 'user',
             id : crypto.randomUUID()
           }
+        ] 
+        setChatMessage( newChatMessage );
+        const response = Chatbot.getResponse( inputText );        
+        setChatMessage([
+          ...newChatMessage,
+          {
+            message : response,
+            sender : 'bot',
+            id : crypto.randomUUID()
+          }
         ]);
         setInputText('');
       }
-
       return (
         <>
           <input 
@@ -52,24 +62,20 @@
         </>
       );
     };
-    
-    //const message = properties.message;
-    //const sender = properties.sender;
-    //const { message , sender } = properties;
-    function ChatMessage({ message , sender }) {
-      return (
-        <div>
-          { sender === "bot" && <img src="images/bot.png" width="50"/>} 
-          { message }
-          { sender === "user" && <img src="images/user.png" width="50"/>}
-        </div>
-      );
-    };
-
-    
-    // Message Component
-    function ChatMessages( { chatMessages } ) {
-
+                                               // <------ Message Component ----->
+    function ChatMessages({ chatMessages }) {
+      //const message = properties.message;
+      //const sender = properties.sender;
+      //const { message , sender } = properties;
+      function ChatMessage({ message , sender }) {
+        return (
+          <div>
+            { sender === "bot" && <img src="images/bot.png" width="50"/>} 
+            { message }
+            { sender === "user" && <img src="images/user.png" width="50"/>}
+          </div>
+        );
+      };
       return (
         <>
           {
@@ -84,12 +90,9 @@
            })}
         </>
       );
-
     };
-
-    // APP
+                                                 // <--------- App ------->
     function App() {
-
       // message array - chatMessages
       const [ chatMessages , setChatMessage ] = React.useState([
         {
@@ -115,7 +118,6 @@
       ]);
       //const chatMessages = array[0];
       //const setChatMessage = array[1];
-      
       return (
         <>
           <ChatInput 
