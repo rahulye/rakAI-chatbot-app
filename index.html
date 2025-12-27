@@ -12,23 +12,50 @@
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script type="text/babel">
+  <script type="text/babel"> 
     const container = document.querySelector('.js-hero-header');
     const rootHeader = ReactDOM.createRoot(container);
 
-    function ChatInput() {
+    function ChatInput({ chatMessages , setChatMessage }) {
+      // 1.get the Input value and save it in inputText
+      const [ inputText , setInputText ] = React.useState('');      
+      function saveInputText( event ) {
+        setInputText( event.target.value );
+      };
+
+      // 2.from the InpuText value --> send it into chatMessages(message array)
+      function sendMessage() {
+        setChatMessage([
+          ...chatMessages,
+          {
+            message : inputText,
+            sender : 'user',
+            id : crypto.randomUUID()
+          }
+        ]);
+        setInputText('');
+      }
+
       return (
         <>
-          <input placeholder="Look up here.." size="40"/>
-          <button>Send</button>
+          <input 
+            onChange = { saveInputText } 
+            placeholder="Look up here.." 
+            size="40"
+            value  = { inputText } // this change the input value after whatever is saved inside the inputText
+          />
+          <button
+            onClick = { sendMessage }  
+          >
+            Send
+          </button>
         </>
       );
     };
-
-    // const message = properties.message;
-    // const sender = properties.sender;
-    // const { message , sender } = properties;
     
+    //const message = properties.message;
+    //const sender = properties.sender;
+    //const { message , sender } = properties;
     function ChatMessage({ message , sender }) {
       return (
         <div>
@@ -39,9 +66,32 @@
       );
     };
 
+    
     // Message Component
-    function ChatMsgComp() {
-      let chatMessagesArray = [
+    function ChatMessages( { chatMessages } ) {
+
+      return (
+        <>
+          {
+            chatMessages.map( (chat) => {
+              return (
+                <ChatMessage
+                  message = {chat.message}
+                  sender = {chat.sender}
+                  key = {chat.id}
+                />
+              ); 
+           })}
+        </>
+      );
+
+    };
+
+    // APP
+    function App() {
+
+      // message array - chatMessages
+      const [ chatMessages , setChatMessage ] = React.useState([
         {
           message : "Hey!. How are you?",
           sender : "user",
@@ -62,27 +112,19 @@
           sender : "bot",
           id : 'id4'
         }
-      ];
-
-      return (
-        chatMessagesArray.map( (chat) => {
-          return (
-            <ChatMessage 
-              message = {chat.message}
-              sender = {chat.sender}
-              key = {chat.id}
-            />
-          ); 
-        })
-      );
-    };
-
-    // APP
-    function App() {
+      ]);
+      //const chatMessages = array[0];
+      //const setChatMessage = array[1];
+      
       return (
         <>
-          <ChatInput />
-          <ChatMsgComp />
+          <ChatInput 
+            chatMessages = { chatMessages }
+            setChatMessage = { setChatMessage }
+          />
+          <ChatMessages 
+            chatMessages = { chatMessages }
+          />
         </>
       );
     };
