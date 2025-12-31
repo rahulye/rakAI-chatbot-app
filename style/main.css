@@ -1,0 +1,40 @@
+.hero-head-container {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.chat-input {
+  flex-grow: 1;
+}
+
+.hero-chatmssg-container {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.chatMsg-container-user {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chatMsg-container-bot {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.chat-message {
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  max-width: 25rem;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.396);
+}
+
+.chat-image {
+  height: 3rem;
+}

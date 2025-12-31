@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-  <section class="js-hero-section">
-  </section>
+  <main>
+    <section class="js-hero-section">
+    </section>
+  </main>
 </body>
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -71,13 +73,14 @@
       setIsLoading(false);
     }
     return (
-      <>
+      <section className = "hero-head-container">
         <input 
           onChange = { saveInputText } 
           placeholder="Look up here.." 
           size="40"
           value  = { inputText } // this change the input value after whatever is saved inside the inputText
           onKeyDown = { handleKeyDown }
+          className = "chat-input"
         />
         <button
           onClick = { sendMessage }  
@@ -85,7 +88,7 @@
         >
           { isLoading ? 'Sending' : 'Send' }
         </button>
-      </>
+      </section>
     );
   };
                                               // <------ Message Component ----->
@@ -95,15 +98,17 @@
     //const { message , sender } = properties;
     function ChatMessage({ message , sender }) {
       return (
-        <div>
-          { sender === "bot" && <img src="images/bot.png" width="50"/>} 
-          { message }
-          { sender === "user" && <img src="images/user.png" width="50"/>}
+        <div className={ sender === "user" ? "chatMsg-container-user" : "chatMsg-container-bot" }>
+          { sender === "bot" && <img className="chat-image" src="images/bot.png"/>} 
+          <div className="chat-message">
+            { message }
+          </div>
+          { sender === "user" && <img className="chat-image" src="images/user.png"/>}
         </div>
       );
     };
     return (
-      <>
+      <section className="hero-chatmssg-container">
         {
           chatMessages.map( (chat) => {
             return (
@@ -114,7 +119,7 @@
               />
             ); 
           })}
-      </>
+      </section>
     );
   };
                                                 // <--------- App ------->
