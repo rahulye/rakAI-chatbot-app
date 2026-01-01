@@ -9,12 +9,15 @@
 body {
   display: flex;
   justify-content: center;
+  margin: 1rem;
 }
 
 main {
-  border: 1px solid black;
-  height: 100vh;
-  width: 60rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 60rem;
+  width: 100%;
+  height: calc(100vh - 2rem);
 }
 
 input {

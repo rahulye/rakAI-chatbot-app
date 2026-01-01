@@ -2,15 +2,13 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
   <title>rakAI-chatbot</title>
   <link rel="stylesheet" href="style/general.css">
   <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-  <main>
-    <section class="js-hero-section">
-    </section>
+  <main class="js-main">
   </main>
 </body>
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -19,8 +17,8 @@
 <script src="https://unpkg.com/supersimpledev@8.0.1/chatbot.js"></script>
 
 <script type="text/babel"> 
-  const container = document.querySelector('.js-hero-section');
-  const rootHeader = ReactDOM.createRoot(container);
+  const mainContainer = document.querySelector('.js-main');
+  const rootHeader = ReactDOM.createRoot(mainContainer);
                                                       // <---- Chat Input Head --->
   function ChatInput({ chatMessages , setChatMessage }) {
     // 1.get the Input value and save it in inputText
@@ -93,6 +91,14 @@
   };
                                               // <------ Message Component ----->
   function ChatMessages({ chatMessages }) {
+    const chatMessagesRef = React.useRef(null); //initial value is 'null'
+
+    React.useEffect( () => {
+      const containerElement = chatMessagesRef.current;
+      if( containerElement ) {
+        containerElement.scrollTop = containerElement.scrollHeight 
+      }
+    }, [ chatMessages ]);
     //const message = properties.message;
     //const sender = properties.sender;
     //const { message , sender } = properties;
@@ -108,7 +114,7 @@
       );
     };
     return (
-      <section className="hero-chatmssg-container">
+      <section className="hero-chatmssg-container" ref={ chatMessagesRef }>
         {
           chatMessages.map( (chat) => {
             return (
@@ -151,13 +157,13 @@
     //const setChatMessage = array[1];
     return (
       <>
-        <ChatInput 
-          chatMessages = { chatMessages }
-          setChatMessage = { setChatMessage }
-        />
-        <ChatMessages 
-          chatMessages = { chatMessages }
-        />
+      <ChatMessages 
+      chatMessages = { chatMessages }
+      />
+      <ChatInput 
+        chatMessages = { chatMessages }
+        setChatMessage = { setChatMessage }
+      />
       </>
     );
   };
