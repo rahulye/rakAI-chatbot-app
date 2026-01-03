@@ -54,7 +54,7 @@
       setChatMessage([
         ...newChatMessage,
         {
-          message : "Thinking..",
+          message : <img className="loading-image" src="./images/loading-spinner.gif" />,
           sender : 'bot',
           id : crypto.randomUUID()
         }
@@ -91,7 +91,7 @@
   };
                                               // <------ Message Component ----->
   function ChatMessages({ chatMessages }) {
-    const chatMessagesRef = React.useRef(null); //initial value is 'null'
+    const chatMessagesRef = React.useRef(null); //initial value is 'null' and useRef returns a object
 
     React.useEffect( () => {
       const containerElement = chatMessagesRef.current;
