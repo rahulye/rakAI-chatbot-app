@@ -1,6 +1,10 @@
-import { useState , useRef , useEffect} from 'react'
-import Chatbot from 'supersimpledev/chatbot'
-                                                    // <---- Chat Input Head --->
+import { useState , useRef , useEffect} from 'react';
+import { Chatbot } from 'supersimpledev';
+import RobotProfileImage from './assets/bot.png';
+import UserProfileImage from './assets/bot.png';
+import LoadingSpinnerGif from './assets/loading-spinner.gif';
+
+                                                     // <---- Chat Input Head --->
 function ChatInput({ chatMessages , setChatMessage }) {
   // 1.get the Input value and save it in inputText
   const [ inputText , setInputText ] = useState('');
@@ -35,7 +39,7 @@ function ChatInput({ chatMessages , setChatMessage }) {
     setChatMessage([
       ...newChatMessage,
       {
-        message : <img className="loading-image" src="images/loading-spinner.gif" />,
+        message : <img className="loading-image" src={ LoadingSpinnerGif } />,
         sender : 'bot',
         id : crypto.randomUUID()
       }
@@ -86,11 +90,11 @@ function ChatMessages({ chatMessages }) {
   function ChatMessage({ message , sender }) {
     return (
       <div className={ sender === "user" ? "chatMsg-container-user" : "chatMsg-container-bot" }>
-        { sender === "bot" && <img className="chat-image" src="images/bot.png"/>} 
+        { sender === "bot" && <img className="chat-image" src={ RobotProfileImage }/>} 
         <div className="chat-message">
           { message }
         </div>
-        { sender === "user" && <img className="chat-image" src="images/user.png"/>}
+        { sender === "user" && <img className="chat-image" src={ UserProfileImage }/>}
       </div>
     );
   };
