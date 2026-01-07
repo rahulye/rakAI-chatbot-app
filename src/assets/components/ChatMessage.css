@@ -1,0 +1,31 @@
+
+@media(min-width:0rem) { 
+
+  .chatMsg-container-user {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+
+  .chatMsg-container-bot {
+    display: flex;
+    justify-content: flex-start;
+    margin-right: auto;
+  }
+
+  .chatMsg-container-user, .chatMsg-container-bot {
+    gap: 0.5rem;
+    max-width: 25rem;
+  }
+
+  .chat-image {
+    height: 3rem;
+    box-shadow: 0px 0px 10px rgba(18, 2, 2, 0.733);
+    border-radius: 2rem;
+  }
+
+  .loading-image {
+    height: 2rem;
+    background-color: none;
+  }
+}
