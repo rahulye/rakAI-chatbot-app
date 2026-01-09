@@ -10,7 +10,7 @@ export function ChatMessages({ chatMessages }) {
     if( containerElement ) {
       containerElement.scrollTop = containerElement.scrollHeight 
     }
-  }, [ chatMessages ]);
+  }, [ chatMessages ]); // chatMessages here, wheneer chatmessages changes then only run thats it  
   //const message = properties.message;
   //const sender = properties.sender;
   //const { message , sender } = properties;
@@ -20,9 +20,10 @@ export function ChatMessages({ chatMessages }) {
         chatMessages.map( (chat) => {
           return (
             <ChatMessage
-              message = {chat.message}
-              sender = {chat.sender}
-              key = {chat.id}
+                message = {chat.message}
+                sender = {chat.sender}
+                time = {chat.time}
+                key = {chat.id}
               />
             ); 
           })}
