@@ -11,6 +11,12 @@ export function ChatMessages({ chatMessages }) {
       containerElement.scrollTop = containerElement.scrollHeight 
     }
   }, [ chatMessages ]); // chatMessages here, wheneer chatmessages changes then only run thats it  
+  
+  
+  useEffect( () => {
+    localStorage.setItem( 'messages' , JSON.stringify( chatMessages ));
+  }, [ chatMessages ]);
+  
   //const message = properties.message;
   //const sender = properties.sender;
   //const { message , sender } = properties;

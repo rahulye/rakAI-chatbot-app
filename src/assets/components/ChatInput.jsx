@@ -56,6 +56,11 @@ export function ChatInput({ chatMessages , setChatMessage }) {
     ]);
     setIsLoading(false);
   }
+
+  function clearMessage() {
+    setChatMessage( [] );
+  };
+
   return (
     <section className = "hero-head-container">
       <input 
@@ -67,10 +72,17 @@ export function ChatInput({ chatMessages , setChatMessage }) {
         className = "chat-input"
       />
       <button
+        className="send-btn"
         onClick = { sendMessage }  
         disabled = { isLoading }
       >
         { isLoading ? 'Sending' : 'Send' }
+      </button>
+      <button
+        className='clr-btn'
+        onClick= { clearMessage }
+      >
+        Clear
       </button>
     </section>
   );

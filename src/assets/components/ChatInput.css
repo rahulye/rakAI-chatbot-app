@@ -3,6 +3,21 @@
   .chat-input {
     flex-grow: 1;
   }
+
+  .send-btn {
+    background-color: rgb(25, 56, 105); 
+  }
+  .send-btn:hover {
+    background-color: rgb(10, 23, 121);
+  }
+
+  .clr-btn {
+    background-color: rgba(128, 128, 128, 0.768);
+  }
+
+  .clr-btn:hover {
+    background-color: rgba(128, 128, 128, 0.983);
+  }
 }
 
 @media(min-width:425px){

@@ -6,7 +6,7 @@ import { Chatbot } from 'supersimpledev';
                                                   
 function App() {
   // message array - chatMessages
-  const [ chatMessages , setChatMessage ] = useState([
+  const [ chatMessages , setChatMessage ] = useState( JSON.parse( localStorage.getItem( 'messages' )) || [
     {
       message : "Hey!. How are you?",
       sender : "user",
