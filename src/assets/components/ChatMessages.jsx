@@ -5,6 +5,7 @@ import './ChatMessages.css'
 export function ChatMessages({ chatMessages }) {
   const chatMessagesRef = useRef(null); //initial value is 'null' and useRef returns a object
 
+  // Scroll-behaviour
   useEffect( () => {
     const containerElement = chatMessagesRef.current;
     if( containerElement ) {
@@ -12,7 +13,7 @@ export function ChatMessages({ chatMessages }) {
     }
   }, [ chatMessages ]); // chatMessages here, wheneer chatmessages changes then only run thats it  
   
-  
+  // LocalStorage
   useEffect( () => {
     localStorage.setItem( 'messages' , JSON.stringify( chatMessages ));
   }, [ chatMessages ]);
@@ -26,13 +27,13 @@ export function ChatMessages({ chatMessages }) {
         chatMessages.map( (chat) => {
           return (
             <ChatMessage
-                message = {chat.message}
-                sender = {chat.sender}
-                time = {chat.time}
-                key = {chat.id}
-              />
-            ); 
-          })}
+              message = {chat.message}
+              sender = {chat.sender}
+              time = {chat.time}
+              key = {chat.id}
+            />
+          ); 
+      })}
     </section>
   );
 };

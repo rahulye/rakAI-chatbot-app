@@ -6,39 +6,19 @@ import { Chatbot } from 'supersimpledev';
                                                   
 function App() {
   // message array - chatMessages
-  const [ chatMessages , setChatMessage ] = useState( JSON.parse( localStorage.getItem( 'messages' )) || [
-    {
-      message : "Hey!. How are you?",
-      sender : "user",
-      id : 'id1',
-      time : '21024525582'
-    },
-    {
-      message : "Yeah I am good. How are you?",
-      sender : "bot",
-      id : 'id2',
-      time : '21024525583'
-    },
-    {
-      message : "Great. Its been long just wanted to catch up?. How you have been? whats going on?",
-      sender : "user",
-      id : 'id3',
-      time : '21024525584'
-    },
-    {
-      message : "Doing alright. Just working yk and went on a trip to Alaska",
-      sender : "bot",
-      id : 'id4',
-      time : '21024525585'
-    }
-  ]);
+  const [ chatMessages , setChatMessage ] = useState( JSON.parse( localStorage.getItem( 'messages' )) || []);
   //const chatMessages = array[0];
   //const setChatMessage = array[1];
 
   useEffect( () => {
     Chatbot.addResponses({
-      'goodbye' : 'Goodbye. Have a great day Rahul!',
-      'give me an id' : () => {
+      'goodbye' : 'Goodbye. Have a great day!',
+      'Hi' : 'Hi! How can I help you?',
+      'Hello' : 'Hello! How can I help you?',
+      'give me a random id' : () => {
+        return `Sure! here --> ${crypto.randomUUID()}`
+      },
+      'Give me a random Id' : () => {
         return `Sure! here --> ${crypto.randomUUID()}`
       }
     });
@@ -46,13 +26,18 @@ function App() {
 
   return (
     <>
-    <ChatMessages 
-      chatMessages = { chatMessages }
-    />
-    <ChatInput 
-      chatMessages = { chatMessages }
-      setChatMessage = { setChatMessage }
-    />
+      {chatMessages.length === 0 && (
+        <p className="welcome-message">
+          Welcome to the rakAI chatbot! <br/>Send a message using the textbox.
+        </p>
+      )}
+      <ChatMessages 
+        chatMessages = { chatMessages }
+      />
+      <ChatInput 
+        chatMessages = { chatMessages }
+        setChatMessage = { setChatMessage }
+      />
     </>
   );
 };

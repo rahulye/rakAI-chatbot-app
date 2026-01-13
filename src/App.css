@@ -1,6 +1,10 @@
 
 @media(min-width:0rem) { 
   /* header */
+  .app-cont { 
+    display: flex;
+
+  }
   .hero-head-container {
     display: flex;
     flex-direction: column;
@@ -24,6 +28,9 @@
 }
 
 @media(min-width:425px){
+}
+
+@media(min-width:625px){
   .hero-head-container {
     flex-direction: row;    
   }
