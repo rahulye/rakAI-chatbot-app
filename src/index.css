@@ -10,6 +10,7 @@ body {
   display: flex;
   justify-content: center;
   margin: 1rem;
+  overflow: hidden; 
 }
 
 #root {
@@ -17,7 +18,7 @@ body {
   flex-direction: column;
   max-width: 60rem;
   width: 100%;
-  height: calc(100vh - 2rem);
+  height: calc(100dvh - 2rem);
 }
 
 input {
