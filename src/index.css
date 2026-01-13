@@ -48,3 +48,12 @@ button:hover {
 button:active {
   transform: scale(0.9);
 }
+
+@media (hover: none) {
+  button:hover {
+    transform: none;
+  }
+  input:hover {
+    transform: none;
+  }
+}
